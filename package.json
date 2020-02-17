@@ -1,0 +1,25 @@
+{
+  "name": "mielelle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./src/index.html --port 3000 --hmr-port 45253",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^2.9.3",
+    "moment": "^2.24.0",
+    "parcel-bundler": "^1.12.4",
+    "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.0",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-router": "^3.1.5"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.1.1",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
