@@ -14,7 +14,6 @@ jobs:
     executor: heroku/default
     steps:
       - heroku/install
-      - run: heroku login
       - run: heroku container:login
       - run: heroku container:release web -a mielelle-prod
 
