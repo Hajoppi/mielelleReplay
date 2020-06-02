@@ -6,9 +6,7 @@ jobs:
   build:
     executor: docker/docker
     steps:
-      - checkout
-      - docker/check:
-        registry: registry.heroku.com
+      - run: docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD registry.heroku.com
       - docker/build:
           image: mielelle-prod/web
       - docker/push:
