@@ -15,7 +15,7 @@ jobs:
   build:
     executor: docker/default
     steps:
-      - checkout 
+      - docker/check
       - docker/build: 
         image: registry.heroku.com/mielelle-prod/web
       - docker/push:
