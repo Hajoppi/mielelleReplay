@@ -13,15 +13,13 @@ workflows:
 
 jobs:
   build:
-    executor: docker/default
+    executor: docker/machine
     steps:
       - docker/check
       - docker/build: 
         image: registry.heroku.com/mielelle-prod/web
       - docker/push:
         image: registry.heroku.com/mielelle-prod/web
-      #- run: docker build -t registry.heroku.com/mielelle-prod/web .
-      #- run: docker push registry.heroku.com/mielelle-prod/web
   deploy:
     executor: heroku/default
     steps:
