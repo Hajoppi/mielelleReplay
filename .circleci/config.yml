@@ -1,27 +1,30 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
-# Use a package of configuration called an orb.
-orbs:
-  heroku: circleci/heroku@1.0.1
-  docker: circleci/docker@1.0.1
+jobs:
+  build:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/build:
+          image: mielelle-prod/web
+      - docker/push:
+          image: mielelle-prod/web
+          registry: registry.heroku.com
+  deploy:
+    executor: heroku/default
+    steps:
+      - heroku/install
+      - run: heroku login
+      - run: heroku container:login
+      - run: heroku container:release web -a mielelle-prod
 
+orbs:
+  docker: circleci/docker@1.0.1
+  heroku: circleci/heroku@1.0.1
+version: 2.1
 workflows:
   heroku_deploy:
     jobs:
       - build
       - deploy
-
-jobs:
-  build:
-    executor: docker/machine
-    steps:
-      - docker/publish:
-        image: mielelle-prod/web
-        registry: registry.heroku.com
-  deploy:
-    executor: heroku/default
-    steps:
-      - heroku/install
-      - run: heroku/login
-      - run: heroku container:login
-      - run: heroku container:release web -a mielelle-prod
+      
