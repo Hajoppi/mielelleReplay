@@ -4,7 +4,7 @@ jobs:
     steps:
       - heroku/install
   build:
-    executor: docker/docker
+    executor: docker/machine
     steps:
       - checkout
       - run: docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD registry.heroku.com
