@@ -1,8 +1,11 @@
 jobs:
+  install:
+    executor: heroku/default
+    steps:
+      - heroku/install
   build:
     executor: docker/docker
     steps:
-      - setup_remote_docker
       - checkout
       - docker/check:
         registry: registry.heroku.com
@@ -11,10 +14,6 @@ jobs:
       - docker/push:
           image: mielelle-prod/web
           registry: registry.heroku.com
-  deploy:
-    executor: heroku/default
-    steps:
-      - heroku/install
       - run: heroku container:release web -a mielelle-prod
 
 orbs:
@@ -24,6 +23,6 @@ version: 2.1
 workflows:
   heroku_deploy:
     jobs:
+      - install
       - build
-      - deploy
       
