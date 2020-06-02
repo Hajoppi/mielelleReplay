@@ -7,7 +7,7 @@ jobs:
     executor: docker/machine
     steps:
       - checkout
-      - run: docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD registry.heroku.com
+      - run: docker login --username=$DOCKER_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
       - run: docker build -t registry.heroku.com/mielelle-prod/web .
       - run: docker push registry.heroku.com/mielelle-prod/web
       - run: heroku container:login
