@@ -8,11 +8,8 @@ jobs:
     steps:
       - checkout
       - run: docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD registry.heroku.com
-      - docker/build:
-          image: mielelle-prod/web
-      - docker/push:
-          image: mielelle-prod/web
-          registry: registry.heroku.com
+      - run: docker build -t registry.heroku.com/mielelle-prod/web .
+      - run: docker push registry.heroku.com/mielelle-prod/web
       - run: heroku container:release web -a mielelle-prod
 
 orbs:
